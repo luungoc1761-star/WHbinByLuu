@@ -87,7 +87,6 @@
         <header>
             <h1>Hệ thống quản lý vị trí và tồn kho</h1>
             <div class="action-buttons">
-                <!-- Dán link Web App Nhập/Xuất kho của anh vào chỗ dấu # -->
                 <a href="#" target="_blank" class="btn btn-out">📤 Xuất Kho</a>
                 <a href="#" target="_blank" class="btn btn-in">📥 Nhập Kho</a>
             </div>
@@ -100,7 +99,7 @@
         </div>
 
         <div class="table-container">
-            <div id="loader">ĐANG TRUY XUẤT DỮ LIỆU TỪ GOOGLE SHEETS...</div>
+            <div id="loader">ĐANG KẾT NỐI VỚI API GOOGLE SHEETS...</div>
             <table id="inventoryTable" style="display: none;">
                 <thead>
                     <tr>
@@ -120,35 +119,46 @@
     </div>
 
     <script>
+        // ============================================================
+        // 🚩 ANH DÁN ĐƯỜNG LINK WEB APP GAS CỦA ANH VÀO ĐÂY 🚩
+        const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyTz5UjXE0kHwJ-zEypmToKz77tOy1FkPi4Q9UsMjhgLvowtpGXnsPVO1fXgLRzSm4/exec";
+        // ============================================================
+
         let allData = [];
 
-        // KẾT NỐI THẬT VỚI GOOGLE APPS SCRIPT
         window.onload = function() {
-            // Gọi hàm getDataFromSheet() trong file Code.gs
-            google.script.run
-                .withSuccessHandler(showData) 
-                .withFailureHandler(showError)
-                .getDataFromSheet();
+            fetchData();
         };
+
+        async function fetchData() {
+            const loader = document.getElementById('loader');
+            
+            if (GAS_WEB_APP_URL === "DÁN_LINK_WEB_APP_CỦA_ANH_VÀO_ĐÂY") {
+                loader.textContent = "⚠️ Vui lòng dán link GAS vào trong code!";
+                return;
+            }
+
+            try {
+                // Sử dụng fetch để gọi API từ GAS
+                const response = await fetch(GAS_WEB_APP_URL);
+                const data = await response.json();
+                showData(data);
+            } catch (err) {
+                console.error(err);
+                loader.textContent = "❌ LỖI KẾT NỐI: Kiểm tra quyền truy cập Web App (Anyone)";
+            }
+        }
 
         function showData(data) {
             if (!data || data.length === 0) {
-                document.getElementById('loader').textContent = "KHÔNG TÌM THẤY DỮ LIỆU TRONG SHEET";
+                document.getElementById('loader').textContent = "KHÔNG TÌM THẤY DỮ LIỆU";
                 return;
             }
             
             allData = data;
-            const loader = document.getElementById('loader');
-            const table = document.getElementById('inventoryTable');
-            
-            loader.style.display = 'none';
-            table.style.display = 'table';
-
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('inventoryTable').style.display = 'table';
             renderTable(allData);
-        }
-
-        function showError(err) {
-            document.getElementById('loader').textContent = "LỖI KẾT NỐI: " + err;
         }
 
         function renderTable(data) {

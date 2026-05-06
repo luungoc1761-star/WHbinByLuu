@@ -16,214 +16,69 @@
             --bg-dark: #0f172a;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body {
             background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+            background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
             color: var(--text-main);
             min-height: 100vh;
             padding: 2rem;
             overflow-x: hidden;
         }
 
-        /* Animation cho toàn bộ trang */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .container { max-width: 1300px; margin: 0 auto; animation: fadeInUp 0.8s ease-out; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        /* Header & Actions */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding: 1rem 2rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;
+            padding: 1rem 2rem; background: var(--glass-bg); backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
         h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--primary-grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 1.5rem; font-weight: 700; background: var(--primary-grad);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
+        .action-buttons { display: flex; gap: 1rem; }
         .btn {
-            padding: 0.7rem 1.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding: 0.7rem 1.5rem; border-radius: 12px; text-decoration: none;
+            font-weight: 600; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer; border: none; display: flex; align-items: center; gap: 8px;
         }
+        .btn-in { background: var(--primary-grad); color: white; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); }
+        .btn-out { background: transparent; color: white; border: 1px solid var(--glass-border); backdrop-filter: blur(5px); }
+        .btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6); }
 
-        .btn-in {
-            background: var(--primary-grad);
-            color: white;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
-        }
-
-        .btn-out {
-            background: transparent;
-            color: white;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(5px);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6);
-        }
-
-        /* Smart Filter Section */
-        .filter-section {
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-box {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-        }
-
+        .filter-section { margin-bottom: 1.5rem; display: flex; justify-content: center; }
+        .search-box { position: relative; width: 100%; max-width: 600px; }
         .search-box input {
-            width: 100%;
-            padding: 1rem 1.5rem 1rem 3.5rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            color: white;
-            font-size: 1rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            width: 100%; padding: 1rem 1.5rem 1rem 3.5rem; background: var(--glass-bg);
+            border: 1px solid var(--glass-border); border-radius: 16px; color: white;
+            font-size: 1rem; backdrop-filter: blur(10px); transition: all 0.3s ease;
         }
+        .search-box input:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.2); }
+        .search-box::before { content: '🔍'; position: absolute; left: 1.2rem; top: 50%; transform: translateY(-50%); opacity: 0.5; }
 
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.2);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .search-box::before {
-            content: '🔍';
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.5;
-        }
-
-        /* Table Design */
         .table-container {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border);
+            border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        thead { background: rgba(255, 255, 255, 0.03); border-bottom: 1px solid var(--glass-border); }
+        th { padding: 1.2rem 1rem; color: var(--text-dim); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); font-size: 0.95rem; transition: all 0.2s ease; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255, 255, 255, 0.05); color: var(--accent-color); }
 
-        thead {
-            background: rgba(255, 255, 255, 0.03);
-            border-bottom: 1px solid var(--glass-border);
-        }
+        #loader { text-align: center; padding: 3rem; font-weight: 300; color: var(--text-dim); letter-spacing: 2px; }
 
-        th {
-            padding: 1.2rem 1rem;
-            color: var(--text-dim);
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--accent-color);
-            transform: scale(1.002);
-        }
-
-        /* Loading State */
-        #loader {
-            text-align: center;
-            padding: 3rem;
-            font-weight: 300;
-            color: var(--text-dim);
-            letter-spacing: 2px;
-        }
-
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { 
-            background: var(--glass-border); 
-            border-radius: 10px; 
-        }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
-
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -232,9 +87,9 @@
         <header>
             <h1>Hệ thống quản lý vị trí và tồn kho</h1>
             <div class="action-buttons">
-                <!-- Thay link sau vào href -->
-                <a href="#" class="btn btn-out">📤 Xuất Kho</a>
-                <a href="#" class="btn btn-in">📥 Nhập Kho</a>
+                <!-- Dán link Web App Nhập/Xuất kho của anh vào chỗ dấu # -->
+                <a href="#" target="_blank" class="btn btn-out">📤 Xuất Kho</a>
+                <a href="#" target="_blank" class="btn btn-in">📥 Nhập Kho</a>
             </div>
         </header>
 
@@ -245,7 +100,7 @@
         </div>
 
         <div class="table-container">
-            <div id="loader">ĐANG LẤY DỮ LIỆU...</div>
+            <div id="loader">ĐANG TRUY XUẤT DỮ LIỆU TỪ GOOGLE SHEETS...</div>
             <table id="inventoryTable" style="display: none;">
                 <thead>
                     <tr>
@@ -255,46 +110,45 @@
                         <th>Số Lượng</th>
                         <th>Thùng</th>
                         <th>Số Lô Hàng</th>
+                        <th>ID</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <!-- Dữ liệu từ GAS sẽ đổ vào đây -->
                 </tbody>
             </table>
         </div>
     </div>
 
     <script>
-        // Dữ liệu mẫu (Khi kết nối GAS, hàm này sẽ được thay bằng google.script.run)
         let allData = [];
 
-        // MÔ PHỎNG LẤY DỮ LIỆU TỪ GAS
+        // KẾT NỐI THẬT VỚI GOOGLE APPS SCRIPT
         window.onload = function() {
-            // Trong thực tế, hãy dùng: 
-            // google.script.run.withSuccessHandler(showData).getDataFromSheet();
-            
-            setTimeout(() => {
-                const mockData = [
-                    ["MAT-001", "CONT-A1", "V-01-01", "500", "T-10", "LOT-2024-01"],
-                    ["MAT-002", "CONT-A2", "V-01-02", "200", "T-05", "LOT-2024-02"],
-                    ["MAT-003", "CONT-B1", "V-02-01", "1000", "T-20", "LOT-2024-03"],
-                    ["MAT-004", "CONT-B2", "V-02-02", "150", "T-03", "LOT-2024-04"],
-                    ["MAT-005", "CONT-C1", "V-03-01", "700", "T-12", "LOT-2024-05"],
-                ];
-                showData(mockData);
-            }, 1500);
+            // Gọi hàm getDataFromSheet() trong file Code.gs
+            google.script.run
+                .withSuccessHandler(showData) 
+                .withFailureHandler(showError)
+                .getDataFromSheet();
         };
 
         function showData(data) {
+            if (!data || data.length === 0) {
+                document.getElementById('loader').textContent = "KHÔNG TÌM THẤY DỮ LIỆU TRONG SHEET";
+                return;
+            }
+            
             allData = data;
             const loader = document.getElementById('loader');
             const table = document.getElementById('inventoryTable');
-            const tbody = document.getElementById('tableBody');
-
+            
             loader.style.display = 'none';
             table.style.display = 'table';
 
             renderTable(allData);
+        }
+
+        function showError(err) {
+            document.getElementById('loader').textContent = "LỖI KẾT NỐI: " + err;
         }
 
         function renderTable(data) {
@@ -303,7 +157,7 @@
 
             data.forEach((row, index) => {
                 const tr = document.createElement('tr');
-                tr.style.animation = `fadeInUp ${0.3 + index * 0.05}s ease-out`;
+                tr.style.animation = `fadeInUp ${0.2 + index * 0.03}s ease-out`;
                 
                 row.forEach(cell => {
                     const td = document.createElement('td');
@@ -314,14 +168,11 @@
             });
         }
 
-        // THUẬT TOÁN LỌC THÔNG MINH (CLIENT-SIDE)
         function filterData() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            
             const filtered = allData.filter(row => {
-                return row.some(cell => cell.toLowerCase().includes(query));
+                return row.some(cell => String(cell).toLowerCase().includes(query));
             });
-
             renderTable(filtered);
         }
     </script>
